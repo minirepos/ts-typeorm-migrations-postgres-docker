@@ -1,1 +1,1 @@
-# TypeORM migrations, with PostgreSQL and Docker, deployed to Heroku
+# TypeORM project with migrations, PostgreSQL, and Docker
