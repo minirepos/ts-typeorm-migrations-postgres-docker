@@ -1,5 +1,4 @@
 import { createConnection, Connection } from 'typeorm'
-import { spawnSync } from 'child_process'
 
 let connection: Connection
 
@@ -17,7 +16,7 @@ test('migrations', async () => {
   expect(tables.includes('_migrations')).toBe(false)
   expect(tables.includes('user')).toBe(false)
   expect(tables.includes('note')).toBe(false)
-  spawnSync('yarn', ['_run-migrations'])
+  await connection.runMigrations()
   tables = await getTableNames()
   expect(tables.includes('_migrations')).toBe(true)
   expect(tables.includes('user')).toBe(true)
