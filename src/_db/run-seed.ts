@@ -2,14 +2,11 @@ import 'dotenv/config'
 
 import { createConnection } from 'typeorm'
 
-import User from './user/User.entity'
+import seed from './seed'
 
 const main = async () => {
   const connection = await createConnection()
-
-  const user = await connection.manager.findOne(User, { email: 'hello@example.com' })
-  console.log(user)
-
+  await seed(connection)
   await connection.close()
 }
 

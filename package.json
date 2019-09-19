@@ -5,6 +5,7 @@
     "test": "run-s start-test-db wait-test-db-ready jest; yarn stop-test-db",
     "jest": "jest",
     "dev": "ts-node src",
+    "seed": "ts-node src/_db/run-seed",
     "start-local-db": "docker-compose up -d local-db",
     "start-test-db": "docker-compose up -d test-db",
     "stop-test-db": "docker-compose rm -s -f test-db",
