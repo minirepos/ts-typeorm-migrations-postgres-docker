@@ -29,7 +29,6 @@
     "dotenv": "8.1.0",
     "pg": "7.12.1",
     "reflect-metadata": "0.1.13",
-    "sqlite3": "4.1.0",
     "typeorm": "0.2.19"
   },
   "devDependencies": {
