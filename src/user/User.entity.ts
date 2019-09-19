@@ -1,11 +1,14 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
   VersionColumn,
 } from 'typeorm'
+
+import Note from '../note/Note.entity'
 
 @Entity()
 class User {
@@ -17,6 +20,9 @@ class User {
 
   @Column()
   email: string
+
+  @OneToMany(type => Note, note => note.user, { cascade: true })
+  notes: Note[]
 
   @CreateDateColumn()
   createdAt: Date

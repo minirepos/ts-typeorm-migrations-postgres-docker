@@ -35,6 +35,11 @@ test('migration and seeding', async () => {
 
   await seed(connection)
 
-  expect((await connection.manager.find(User))[0].email).toBe('hello@example.com')
-  expect((await connection.manager.find(Note))[0].content).toBe('Hello')
+  expect(
+    (await connection.manager.findOne(
+      User,
+      { email: 'hello@example.com' },
+      { relations: ['notes'] }
+    )).notes[0].content
+  ).toBe('Hello')
 })
