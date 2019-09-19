@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+  local-db:
+    image: postgres:latest
+    volumes:
+      - ./.data/postgres:/var/lib/postgresql/data
+    ports:
+      - '8432:5432'
+    networks:
+      - minirepos-net
+  test-db:
+    image: postgres:latest
+    ports:
+      - '8433:5432'
+    networks:
+      - minirepos-net
+
+networks:
+  minirepos-net:
+    name: minirepos-net

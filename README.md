@@ -1,2 +1,1 @@
-# ts-typeorm-migrations
-TypeORM Migrations Example
+# TypeORM migrations, with PostgreSQL and Docker, deployed to Heroku

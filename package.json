@@ -1,0 +1,40 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "run-s start-local-db wait-local-db-ready _show-migrations dev",
+    "test": "run-s start-test-db wait-test-db-ready jest; yarn stop-test-db",
+    "jest": "jest",
+    "dev": "ts-node src",
+    "start-local-db": "docker-compose up -d local-db",
+    "start-test-db": "docker-compose up -d test-db",
+    "stop-test-db": "docker-compose rm -s -f test-db",
+    "wait-local-db-ready": "until docker run --rm --link local-db:pg --net minirepos-net postgres:latest pg_isready -U postgres -h pg; do sleep 1; done",
+    "wait-test-db-ready": "until docker run --rm --link test-db:pg --net minirepos-net postgres:latest pg_isready -U postgres -h pg; do sleep 1; done",
+    "generate-migration": "run-s start-local-db wait-local-db-ready _generate-migration",
+    "show-migrations": "run-s start-local-db wait-local-db-ready _show-migrations",
+    "run-migrations": "run-s start-local-db wait-local-db-ready _run-migrations",
+    "_generate-migration": "ts-node ./node_modules/typeorm/cli.js migration:generate -n $NAME",
+    "_show-migrations": "ts-node ./node_modules/typeorm/cli.js migration:show",
+    "_run-migrations": "ts-node ./node_modules/typeorm/cli.js migration:run"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
+  },
+  "dependencies": {
+    "dotenv": "8.1.0",
+    "pg": "7.12.1",
+    "reflect-metadata": "0.1.13",
+    "sqlite3": "4.1.0",
+    "typeorm": "0.2.19"
+  },
+  "devDependencies": {
+    "@types/jest": "24.0.18",
+    "@types/node": "12.7.5",
+    "jest": "24.9.0",
+    "npm-run-all": "4.1.5",
+    "ts-jest": "24.1.0",
+    "ts-node": "8.4.1",
+    "typescript": "3.6.3"
+  }
+}
